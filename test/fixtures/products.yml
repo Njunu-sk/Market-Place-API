@@ -1,9 +1,3 @@
-one:
-  title: TV Plosmo Philopps
-  price: 9999.99
-  published: false
-  user: one
-
 two:
   title: Azos Zeenbok
   price: 499.99
@@ -15,3 +9,9 @@ another_tv:
   price: 99.99
   published: false
   user: two
+
+one:
+  title: TV Plosmo Philopps
+  price: 9999.99
+  published: false
+  user: one
