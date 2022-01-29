@@ -15,7 +15,17 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
   end
 
-  test 'should show orders' do
+  test 'should show orders /index' do
+    get api_v1_orders_url, headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) }, as: :json
+    assert_response :success
+
+    json_response = JSON.parse(response.body, symbolize_names: true)
+
+    assert_equal @order.user.orders.count, json_response[:data].count
+
+    assert_json_response_is_paginated json_response
+  end
+  test 'should show orders /show' do
     get api_v1_orders_url(@order),
       headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) }, as: :json
        assert_response :success
