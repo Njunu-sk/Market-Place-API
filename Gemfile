@@ -50,3 +50,7 @@ gem "jwt", "~> 2.3"
 gem 'jsonapi-serializer'
 
 gem 'kaminari'
+gem 'ffaker', '~> 2.20'
+gem "bullet", "~> 7.0", :group => :development
+
+gem "rack-cors", "~> 1.1"
