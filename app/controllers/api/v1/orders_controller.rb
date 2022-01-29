@@ -1,5 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
-  before_action :check_login, only: [:index]
+  before_action :check_login, only: [:index, :show, :create]
 
   def index
     render json: OrderSerializer.new(current_user.orders).serializable_hash
@@ -30,6 +30,6 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:total, products_ids: [])
+    params.require(:order).permit(:total, product_ids: [])
   end
 end

@@ -2,7 +2,7 @@ two:
   title: Azos Zeenbok
   price: 499.99
   published: false
-  user: two
+  user: one
 
 another_tv:
   title: Cheap TV
