@@ -64,5 +64,4 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :created
   end
-
 end

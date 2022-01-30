@@ -7,8 +7,7 @@ module Authenticable
 
     decoded = JsonWebToken.decode(header)
 
-    @current_user = User.find(decoded[:user_id]) rescue
-   ActiveRecord::RecordNotFound
+    @current_user = User.find(decoded[:user_id]) rescue ActiveRecord::RecordNotFound
   end
 
   protected

@@ -17,28 +17,26 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create user' do
     assert_difference('User.count') do
-      post api_v1_users_url, params: { user: { email: 'test@test.org', password_digest: 'test' } }, as: :json
+      post api_v1_users_url, params: { user: { email: 'test@test.org', password: 'test' } }, as: :json
     end
     assert_response :created
   end
 
   test 'should not create user with taken email' do
     assert_no_difference('User.count') do
-      post api_v1_users_url, params: { user: { email: @user.email, password_digest: 'test' } }, as: :json
+      post api_v1_users_url, params: { user: { email: @user.email, password: 'test' } }, as: :json
     end
     assert_response :unprocessable_entity
   end
 
   test "should update user" do
-    patch api_v1_user_url(@user), params: { user: { email:
-      @user.email } },
+    patch api_v1_user_url(@user), params: { user: { email: @user.email } },
       headers: { Authorization: JsonWebToken.encode(user_id: @user.id) }, as: :json
 
     assert_response :success
   end
   test "should forbid update user" do
-    patch api_v1_user_url(@user), params: { user: { email:
-    @user.email } }, as: :json
+    patch api_v1_user_url(@user), params: { user: { email: @user.email } }, as: :json
 
     assert_response :forbidden
   end
@@ -52,9 +50,10 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :no_content
   end
 
-  test 'should forbid destroy user' do
+  test 'should forbid destroy user because JWT is invalid' do
     assert_no_difference('User.count') do
-      delete api_v1_user_url(@user), as: :json
+      delete api_v1_user_url(@user),
+        headers: { Authorization: JsonWebToken.encode(user_id: nil) }, as: :json
     end
     assert_response :forbidden
   end

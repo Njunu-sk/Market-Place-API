@@ -3,5 +3,5 @@ class UserSerializer
   attributes :email
   has_many :products
 
-  cache_options enabled: true, cache_length: 12.hours
+  cache_options store: Rails.cache, namespace: 'json-serializer', expires_in: 1.hour
 end
